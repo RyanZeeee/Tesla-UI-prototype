@@ -1,0 +1,68 @@
+.seat-drawer-viewport {position:absolute;inset:0 0 120px;z-index:26;overflow:clip;isolation:isolate;pointer-events:none}
+.seat-panel {position:absolute;inset:210px 0 0;overflow:clip;background:radial-gradient(ellipse at 50% 65%,#161b21 0%,#0b0e12 44%,#08090b 76%);border-top:1px solid #ffffff13;border-radius:24px 24px 0 0;transform:translate3d(0,100%,0);will-change:transform;backface-visibility:hidden;pointer-events:none;transition:transform var(--duration-normal) var(--easing-default)}
+.seat-panel[data-open=true] {transform:translate3d(0,0,0);pointer-events:auto}
+.seat-panel-grip {position:absolute;top:26px;left:calc(50% - 32px);width:64px;height:4px;background:#41464e;border-radius:8px}
+.seat-panel-actions {position:absolute;right:55px;top:26px;display:flex;gap:18px;z-index:5}
+.seat-panel button {border:0;background:transparent;color:#a7b1bc;display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;padding:0;cursor:pointer;transition:color .18s,background .18s,box-shadow .18s}
+.seat-panel-actions button {background:#ffffff05;border:1px solid #ffffff0a}
+.seat-panel button:hover {color:#eef5fc;background:#c3d8ea12}
+.seat-panel button:active {background:#beddf425;color:#e5f3ff}
+.seat-panel button:disabled {opacity:.25;cursor:default}
+.seat-panel button:focus-visible {outline:2px solid #bed7eb;outline-offset:4px}
+.seat-stage {position:absolute;inset:120px 90px 95px}
+.seat-render {position:absolute;inset:0;pointer-events:none}
+.seat-render canvas {display:block;width:100%;height:100%}
+.seat-controls {position:absolute;inset:0;pointer-events:none;--guide-color:#8293a3;--guide-strong:#c7d3de;--guide-surface:#1a2028;--rail-x:48.5%}
+.seat-side-1 {--rail-x:52.5%}
+.seat-controls[data-selected=true] {--guide-color:#8da8bf;--guide-strong:#d3e6f7;--guide-surface:#253443}
+.seat-model-hit {position:absolute;touch-action:none;pointer-events:auto;outline:none;cursor:grab}
+.seat-model-hit:active {cursor:grabbing}
+.position-hit-0,.position-hit-1 {top:12%;width:17%;height:73%}
+.position-hit-0 {left:31%}.position-hit-1 {left:52%}
+.recline-hit-0,.recline-hit-1 {top:22%;width:15%;height:43%}
+.recline-hit-0 {left:3%}.recline-hit-1 {right:3%}
+.seat-guide {position:absolute;pointer-events:none;color:var(--guide-color)}
+.seat-guide button,.seat-drag-handle {pointer-events:auto;touch-action:none}
+.seat-panel .seat-step {position:absolute;width:52px;height:52px;color:var(--guide-strong);background:transparent;border:1px solid transparent;box-shadow:none}
+.seat-panel .seat-step:hover {border-color:#d5e8f888;background:#314253;color:#fff}
+.seat-panel .seat-step:active {background:#45637e;border-color:#d7ebff}
+.seat-drag-handle {position:absolute;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border:.75px solid #a4b8ca80;border-radius:50%;background:linear-gradient(145deg,#323d48,#17212b);box-shadow:0 0 0 2.5px #0a10177a,0 1.5px 7px #0007;color:#e2edf7;cursor:grab;outline:none;z-index:3}
+.seat-drag-handle:before {content:'';position:absolute;inset:-12px;border-radius:50%}
+.seat-drag-handle:after {content:'';position:absolute;inset:-4px;border:.5px solid #afdcff66;border-radius:50%;opacity:0;pointer-events:none}
+.seat-drag-handle:hover,.seat-drag-handle:focus-visible,.seat-drag-handle[data-active=true] {border-color:#d9ecff;background:linear-gradient(145deg,#59758c,#293d50);box-shadow:0 0 0 3px #a3d8ff18,0 0 12px #9dcced28;color:#fff}
+.seat-drag-handle:focus-visible {outline:2px solid #d5e9fa;outline-offset:7px}
+.seat-drag-handle[data-active=true] {cursor:grabbing}
+.seat-rotation-guide {left:var(--hinge-x);top:var(--hinge-y);width:0;height:0}
+.seat-back-orbit {position:absolute;left:0;top:0;width:calc(var(--back-radius)*2);height:calc(var(--back-radius)*2);transform:translate(-50%,-50%) rotate(calc(var(--back-angle) + 90deg));transform-origin:center}
+.seat-orbit-path {position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.seat-orbit-path path {fill:none;stroke:var(--guide-color);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.seat-orbit-path .orbit-halo {stroke:#afcfe7;stroke-width:7;opacity:.06}
+.seat-orbit-path .orbit-line {opacity:.7}
+.seat-orbit-path .orbit-tether {stroke-width:1;stroke-dasharray:3 6;opacity:.24}
+.orbit-pivot {fill:var(--guide-strong);opacity:.55}
+.seat-back-orbit .orbit-start {left:34.55%;top:2.45%}
+.seat-back-orbit .orbit-end {left:65.45%;top:2.45%}
+.seat-back-orbit .seat-step,.recline-handle {transform:translate(-50%,-50%) rotate(calc(-90deg - var(--back-angle)))}
+.recline-handle {left:50%;top:0}
+.seat-position-guide {left:var(--rail-x);top:calc(var(--front-y) - 114px);width:52px;height:228px;transform:translateX(-50%)}
+.seat-rail {position:absolute;top:27px;bottom:27px;left:50%;width:1px;background:linear-gradient(transparent,var(--guide-color) 12%,var(--guide-color) 88%,transparent);opacity:.6;display:flex;flex-direction:column;align-items:center;justify-content:space-around}
+.seat-rail i {width:7px;height:1px;background:var(--guide-color)}
+.seat-guide .rail-start {left:50%;top:0;transform:translate(-50%,-50%)}
+.seat-guide .rail-end {left:50%;bottom:0;transform:translate(-50%,50%)}
+.position-handle {left:50%;top:var(--position-progress);transform:translate(-50%,-50%)}
+.seat-leader {position:absolute;height:1px;border-top:1px dashed #98b1c24d;pointer-events:none}
+.seat-leader:after {content:'';position:absolute;right:-3px;top:-3px;width:5px;height:5px;border-radius:50%;background:#b8c9d7aa;box-shadow:0 0 0 4px #abcce50a}
+.seat-position-leader {left:var(--front-x);top:var(--front-y);width:calc(var(--rail-x) - var(--front-x))}
+.seat-position-leader:after {left:-3px;right:auto}
+.seat-side-1 .seat-position-leader {left:var(--rail-x);width:calc(var(--front-x) - var(--rail-x))}
+.seat-side-1 .seat-position-leader:after {left:auto;right:-3px}
+.seat-controls[data-guided-axis=recline] .seat-rotation-guide,.seat-controls[data-moving-axis=recline] .seat-rotation-guide,
+.seat-controls[data-guided-axis=position] .seat-position-guide,.seat-controls[data-moving-axis=position] .seat-position-guide {--guide-color:#bcdcf6;--guide-strong:#eff8ff}
+.seat-controls[data-guided-axis=recline] .orbit-tether,.seat-controls[data-moving-axis=recline] .orbit-tether {opacity:.55}
+.seat-panel[data-open=true] .seat-controls[data-selected=true] .seat-drag-handle:after {animation:seat-handle-invitation 1.4s ease-out 2}
+@keyframes seat-handle-invitation {0%{transform:scale(.85);opacity:.65}100%{transform:scale(1.6);opacity:0}}
+.seat-loading {position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.seat-loading i {width:26px;height:26px;border:1px solid #4f627433;border-top-color:#8fa6bd;border-radius:50%;animation:seat-loading 1s linear infinite}
+.seat-panel .seat-retry {position:absolute;left:calc(50% - 28px);top:calc(50% - 28px);z-index:5}
+@keyframes seat-loading {to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce) {.seat-panel,.seat-panel button {transition:none}.seat-loading i,.seat-panel[data-open=true] .seat-drag-handle:after{animation:none}}

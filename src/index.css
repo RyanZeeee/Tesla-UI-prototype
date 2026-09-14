@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./dashboard.css";
+
+/* 全局样式重置 */
+body {
+  margin: 0;
+  background: var(--color-page-bg);
+  overflow: hidden;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Treat dashboard content as controls rather than selectable document content. */
+#root,
+#root * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#root img,
+#root svg,
+#root a {
+  -webkit-user-drag: none;
+}
+
+/* Text fields still support caret placement, selection and copying. */
+#root input:not([type="range"]),
+#root textarea,
+#root [contenteditable="true"],
+#root [contenteditable="true"] * {
+  -webkit-user-select: text;
+  user-select: text;
+}

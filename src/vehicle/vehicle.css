@@ -1,0 +1,20 @@
+.vehicle-model { position: absolute; top: 0; height: 630px; }
+.vehicle-model-canvas { width: 100%; height: 100%; transition: opacity var(--duration-normal) var(--easing-default); }
+.vehicle-model-canvas canvas:focus-visible { outline: 1px solid var(--color-dashboard-muted); outline-offset: -14px; border-radius: var(--radius-toast); }
+.vehicle-model-placeholder { position: absolute; top: 235px; left: 0; width: 100%; height: 630px; display: grid; place-items: center; }
+.vehicle-model-placeholder img { width: 580px; height: 630px; opacity: .2; }
+.vehicle-model-message { position: absolute; top: 280px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 16px; white-space: nowrap; font-size: 18px; color: var(--color-dashboard-toolbar); }
+.vehicle-model-message button { border: 1px solid var(--color-dashboard-muted); border-radius: var(--radius-button); padding: 8px 20px; cursor: pointer; }
+.vehicle-cargo-controls { position: absolute; inset: 0; pointer-events: none; }
+.vehicle-cargo-callout { position: absolute; display: flex; align-items: center; flex-direction: column; transform: translate(-50%, -100%); }
+.vehicle-cargo-button { pointer-events: auto; min-width: 132px; min-height: 62px; display: flex; align-items: center; justify-content: center; padding: 10px 16px; border: 0; background: transparent; color: #f1f2f4; font: inherit; font-size: 20px; cursor: pointer; text-shadow: 0 1px 5px rgba(0,0,0,.55); transition: color 160ms ease; }
+.vehicle-cargo-button:hover { color: #b9c6d8; }
+.vehicle-cargo-button:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 6px; }
+.vehicle-cargo-button:disabled { cursor: default; }
+.vehicle-cargo-leader { display: block; width: 1px; height: var(--leader-height, 100px); opacity: var(--leader-opacity, 1); background: linear-gradient(to bottom, rgba(232,238,246,.58), rgba(232,238,246,.18)); position: relative; }
+.vehicle-cargo-leader::after { content: ''; position: absolute; width: 5px; height: 5px; left: -2px; bottom: -2px; border-radius: 50%; background: rgba(235,240,248,.7); }
+.vehicle-cargo-side-leader { position: absolute; right: 100%; top: 31px; width: var(--side-leader-width, 0px); height: 1px; opacity: var(--side-leader-opacity, 0); background: linear-gradient(to right, rgba(232,238,246,.25), rgba(232,238,246,.58)); }
+.vehicle-cargo-side-leader::before { content: ''; position: absolute; left: -2px; top: -2px; width: 5px; height: 5px; border-radius: 50%; background: rgba(235,240,248,.7); }
+
+.vehicle-cargo-callout[data-cargo="charge"] .vehicle-cargo-side-leader { right:auto; left:100%; background:linear-gradient(to left, rgba(232,238,246,.25), rgba(232,238,246,.58)); }
+.vehicle-cargo-callout[data-cargo="charge"] .vehicle-cargo-side-leader::before { left:auto; right:-2px; }

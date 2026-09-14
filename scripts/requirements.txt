@@ -1,0 +1,3 @@
+# Optional offline asset-authoring tools, not required to run the app.
+numpy>=2,<3
+opencv-python>=4,<5

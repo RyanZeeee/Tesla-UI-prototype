@@ -1,0 +1,61 @@
+# 构建并部署到 GitHub Pages
+# 版本号对齐 GitHub 官方 Pages 起步模板（actions/starter-workflows: pages/static.yml）
+name: Deploy to GitHub Pages
+
+on:
+  # 推送到主分支时自动发布
+  push:
+    branches: [main]
+  # 也可以在 Actions 页面手动触发
+  workflow_dispatch:
+
+# 允许 GITHUB_TOKEN 写入 Pages 并使用 OIDC 身份
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署；不打断正在进行的生产部署
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 仓库名为 Tesla-UI-prototype，站点位于 /Tesla-UI-prototype/ 子路径，
+      # 必须指定 base，否则线上资源全部 404（白屏）
+      - name: Build
+        run: npm run build -- --base=/Tesla-UI-prototype/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

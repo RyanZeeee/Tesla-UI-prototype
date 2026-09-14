@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3D Model Credits</title>
+<style>body{max-width:760px;margin:70px auto;padding:0 24px;background:#111;color:#eee;font:16px/1.8 system-ui,sans-serif}h1{font-size:28px}h2{font-size:20px;margin-top:32px}a{color:#abd3ff}small{color:#aaa}code{overflow-wrap:anywhere}</style>
+<h1>3D Model Credits</h1>
+<p>This prototype uses the community Model 3 model distributed publicly by TeslaHub as <code>community-m3-rigged.glb</code>, saved locally as <code>tesla-model-3.glb</code>.</p>
+<p><a href="https://github.com/Olrik-WP/TeslaHub/blob/3832ede986aa8ae99e2013af28afc2f3dc6bb341/src/TeslaHub.Web/public/community-models/CREDITS.md">Distribution repository and original credits</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 license</a></p>
+<h2>Author information</h2>
+<p>The model metadata credits <strong>aarajesh</strong>, with the title <em>Tesla White car.</em>, the <a href="https://sketchfab.com/3d-models/tesla-white-car-2a4ee44439dc4b1b98f452a9ff427116">original Sketchfab model</a>, and a CC BY 4.0 license.</p>
+<p>The distribution repository instead credits <strong>ChoochooLi</strong>, with the title <em>Tesla Model 3 (Realistic Graphics)</em>, the <a href="https://sketchfab.com/3d-models/tesla-model-3-realistic-graphics">Sketchfab link listed in the repository</a>, and a CC BY 4.0 license. These credits differ. Both are preserved here; they have not been verified as referring to the same author.</p>
+<h2>Modifications</h2>
+<p>The distribution repository documents articulated opening nodes, compression and optimization, scale and orientation adjustments, and material remapping. This project retains the downloaded GLB and adjusts its display scale, white paint, glass, lighting, camera and shadows at runtime. The climate panel extracts cabin components from the same model, adjusts clipping, materials, lighting and shadows, and adds procedural 3D airflow and a center-screen overlay. Airflow is rendered in front of the steering wheel.</p>
+<p><small>Downloaded revision: 3832ede986aa8ae99e2013af28afc2f3dc6bb341. Downloaded file size: 3,230,592 bytes. Retain the authors, sources, license and modification notes above.</small></p>
+<p>At runtime, this project also adds stationary trunk lining and animates the frunk and trunk. The misaligned extra charge cover is disabled; original left outer lens and trim surfaces are detached around a calibrated hinge to provide a flush closing charge-port cover. The source vehicle GLB remains unchanged.</p>
+<h2>Front seat model</h2><p><code>tesla-front-seat.glb</code> is extracted from the original front-seat surfaces of the same vehicle model. It preserves the geometry, separates the cushion and backrest pivots, and adds graphite-gray leather materials, micrograin, stitching and studio lighting. The seat panel shows front and side views with synchronized fore/aft movement and backrest recline. The source, author credits and CC BY 4.0 requirements above also apply.</p>
+<h2>Rendering components</h2><p>Three.js (MIT) and Draco (Apache 2.0). Local copies of the <a href="../draco/THREE-LICENSE.txt">Three.js license</a> and <a href="../draco/LICENSE.txt">Draco license</a> are included.</p>
+</html>

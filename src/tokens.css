@@ -1,0 +1,57 @@
+/* ===== Design Tokens ===== */
+
+@theme {
+  /* ---- Colors ---- */
+  --color-app-bg: #1a1a1a;
+  --color-sidebar: #0E0E0E;
+  --color-nav-tree: #161616;
+  --color-settings-panel: #090909;
+  --color-controlbar: #000000;
+  --color-nav-item-selected: #6E6E6E;
+  --color-page-bg: #111111;
+
+  --color-button-open: rgba(255, 255, 255, 0.2);
+  --color-button-power: rgba(255, 255, 255, 0.05);
+  --color-toast-bg: rgba(0, 0, 0, 0.9);
+  --color-text-white: #ffffff;
+
+  --color-handle-idle: #5a5a5e;
+  --color-handle-hover: #8e8e93;
+  --color-dot-inactive: rgba(255, 255, 255, 0.3);
+  --color-switch-on: #007BE4;
+  --color-vehicle-green: #25CB55;
+  --color-dashboard-muted: rgba(255, 255, 255, 0.4);
+  --color-dashboard-secondary: #7f7f7f;
+  --color-dashboard-divider: rgba(121, 121, 121, 0.2);
+  --color-dashboard-toolbar: rgba(255, 255, 255, 0.6);
+
+  /* ---- Easing ---- */
+  --easing-default: ease-out;
+
+  /* ---- Typography ---- */
+  --font-family-base: Inter, sans-serif;
+  --font-size-base: 20px;
+  --font-size-nav: 18px;
+  --font-size-label: 24px;
+
+  /* ---- Border Radius ---- */
+  --radius-frame: 28px;
+  --radius-inner: 12px;
+  --radius-button: 30px;
+  --radius-toast: 24px;
+  --radius-nav-item: 10px;
+  --radius-icon-sm: 6px;
+
+  /* ---- Animation ---- */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+  --duration-card: 600ms;
+
+  /* ---- Z-Index ---- */
+  --z-content: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
+  --z-toast: 40;
+}
