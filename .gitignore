@@ -36,4 +36,5 @@ coverage/
 .claude/
 .codex/
 .agents/
+.workbuddy/
 Thumbs.db

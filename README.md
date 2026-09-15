@@ -8,6 +8,10 @@ The project includes a real-time Model 3 viewer, a 3D climate interface, front-s
 
 This is an independent design prototype, not an official Tesla product. Vehicle controls, routes, tire readings, and playback are demonstrations: it does not connect to a real car, a live mapping service, or a music-streaming service.
 
+![model-3-film](docs/images/model-3-film.gif)
+
+![prototype](docs/images/prototype.jpg)
+
 ## Features and interactions
 
 ### 3D vehicle
@@ -102,7 +106,7 @@ The production preview normally uses port 4173. Serve the generated files throug
 Tesla-UI-prototype/
 ├── README.md                    # English documentation
 ├── README.zh-CN.md              # Chinese documentation
-├── docs/                       # Architecture, development and asset credits
+├── docs/                       # Architecture, development, credits and README media
 ├── public/
 │   ├── models/                 # Included vehicle/seat GLBs and credit page
 │   └── draco/                  # Local decoder and upstream license files
@@ -129,21 +133,8 @@ Tesla-UI-prototype/
 - The vehicle, cabin, and seat rendering modules are loaded on demand. Vehicle rendering requests frames for loading, motion, interaction, or resize rather than running continuously while idle.
 - Map geometry is processed offline into WebP images to reduce runtime SVG complexity.
 - The design scales as a vehicle display, rather than reflowing as a conventional mobile website. A larger landscape window is recommended for interaction testing.
-- Python and image-authoring dependencies are **optional**. The generated maps and seat model are already included; normal installation does not require regeneration.
 
 See [development and asset tooling](docs/development.md), [3D implementation notes](docs/vehicle-3d.md), and [settings references](docs/vehicle-settings-reference.md).
-
-## Deployment
-
-`npm run build` generates a static site in `dist/`, including the local models and decoder. Publish the **contents of `dist/`** using a static host.
-
-For GitHub Pages under `/Tesla-UI-prototype/`, build with the repository base path:
-
-```bash
-npm run build -- --base=/Tesla-UI-prototype/
-```
-
-Use the normal build for a domain-root deployment. Hosting and a GitHub Pages deployment workflow are not configured automatically in this repository.
 
 ## Troubleshooting
 

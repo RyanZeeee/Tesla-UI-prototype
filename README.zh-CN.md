@@ -8,6 +8,10 @@
 
 这是独立设计原型，并非 Tesla 官方产品。车辆操作、路线、胎压和播放均为演示，不连接真实车辆、实时地图服务或音乐流媒体服务。
 
+![model-3-film](docs/images/model-3-film.gif)
+
+![prototype](docs/images/prototype.jpg)
+
 ## 功能与交互
 
 ### 3D 车模
@@ -102,7 +106,7 @@ npm run preview
 Tesla-UI-prototype/
 ├── README.md                    # 英文主文档
 ├── README.zh-CN.md              # 中文文档
-├── docs/                       # 技术说明、开发说明及资源署名
+├── docs/                       # 技术说明、开发说明、资源署名及 README 图片
 ├── public/
 │   ├── models/                 # 随仓库提供的车辆/座椅 GLB 与来源页
 │   └── draco/                  # 本地解码器及上游许可证
@@ -129,21 +133,8 @@ Tesla-UI-prototype/
 - 车辆、内饰和座椅渲染模块按需加载。车辆场景主要在加载、动效、交互和窗口变化时绘制，静止时不会持续运行渲染循环。
 - 地图几何数据在离线阶段转换为 WebP 图片，降低运行时 SVG 复杂度。
 - 界面按车机画布整体缩放，不是传统手机网页的响应式重排。推荐在较大的横屏窗口中体验。
-- Python 及图片处理依赖仅用于**可选的资源制作**。地图图片和座椅模型已经生成，正常安装无需重新制作。
 
 更多内容见[开发与资源工具说明](docs/development.md)、[3D 实现说明](docs/vehicle-3d.md)和[车控设置资料依据](docs/vehicle-settings-reference.md)。
-
-## 部署
-
-`npm run build` 生成可静态部署的 `dist/`，其中包含模型和解码器。将 **`dist/` 内的内容**发布到静态站点托管服务。
-
-如果使用 GitHub Pages 的 `/Tesla-UI-prototype/` 仓库子路径，可执行：
-
-```bash
-npm run build -- --base=/Tesla-UI-prototype/
-```
-
-部署到域名根路径时使用普通构建命令。仓库未自动配置托管服务或 GitHub Pages 发布工作流。
 
 ## 常见问题
 

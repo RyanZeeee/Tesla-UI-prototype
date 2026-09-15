@@ -9,10 +9,14 @@ import { ClimatePanel } from './components/ClimatePanel'
 import { SeatPanel } from './components/SeatPanel'
 import type { SeatSide } from './seats/seatState'
 import { Settings } from './components/Settings'
+import githubIcon from './assets/icons/github.svg'
 
 const CANVAS_W = 1920
 const CANVAS_H = 1200
+/** 外框四周内边距（p-4） */
 const FRAME_PADDING = 32
+/** 外框外侧上方的页面留白，用于放置 GitHub 仓库入口（随画布一起缩放） */
+const FRAME_HEADER_H = 100
 const VIZ_NORMAL = 580
 const VIZ_FULL = 1920
 
@@ -48,7 +52,7 @@ function App() {
       const vh = window.innerHeight
       const gap = 40
       const totalW = CANVAS_W + FRAME_PADDING
-      const totalH = CANVAS_H + FRAME_PADDING
+      const totalH = CANVAS_H + FRAME_PADDING + FRAME_HEADER_H
       const s = Math.min(vw / totalW, (vh - gap * 2) / totalH)
       setScale(s)
     }
@@ -132,139 +136,160 @@ function App() {
         height: '100vh',
       }}
     >
+      {/* 缩放容器：外框与其外侧上方的 GitHub 入口整体缩放、居中移动 */}
       <div
-        className="p-4"
+        className="relative"
         style={{
-          borderRadius: 'var(--radius-frame)',
-          background: 'var(--color-app-bg)',
           transform: `scale(${scale})`,
           transformOrigin: 'center center',
-          boxShadow: '0 0 80px rgba(0,0,0,0.8), inset 0 0 2px rgba(255,255,255,0.05)',
+          paddingTop: FRAME_HEADER_H,
         }}
       >
-        <div
-          className="relative overflow-hidden"
-          data-dashboard-canvas
-          style={{ width: CANVAS_W, height: CANVAS_H, borderRadius: 'var(--radius-inner)' }}
+        {/* 原型外框外侧、上方：GitHub 仓库入口 */}
+        <a
+          className="github-link"
+          href="https://github.com/RyanZeeee/Tesla-UI-prototype"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open the GitHub repository (opens in a new tab)"
+          title="GitHub · Tesla-UI-prototype"
         >
-          {/* B 区：车辆可视化 */}
-          <div
-            className="absolute top-0 left-0 overflow-hidden"
-            style={{ width: animWidth, height: 1080 }}
-          >
-            <Sidebar dockMusicHost={dockMusicHost} dockMusicOpen={musicOpen} onDockMusicClose={() => setMusicOpen(false)} vizWidth={animWidth} expanded={expanded} onNavigation={openNavigation} />
-          </div>
+          <img src={githubIcon} alt="" aria-hidden="true" draggable={false} />
+        </a>
 
-          {/* C 区：导航地图 */}
+        {/* 原型外框 */}
+        <div
+          className="p-4"
+          style={{
+            borderRadius: 'var(--radius-frame)',
+            background: 'var(--color-app-bg)',
+            boxShadow: '0 0 80px rgba(0,0,0,0.8), inset 0 0 2px rgba(255,255,255,0.05)',
+          }}
+        >
           <div
-            className="absolute top-0 overflow-hidden"
-            style={{
-              left: animWidth,
-              width: navWidth,
-              height: 1080,
-            }}
+            className="relative overflow-hidden"
+            data-dashboard-canvas
+            style={{ width: CANVAS_W, height: CANVAS_H, borderRadius: 'var(--radius-inner)' }}
           >
-            <Navigate ref={navigationRef} vizWidth={animMapWidth} />
-          </div>
-
-          {/* Settings - 位于C区内 */}
-          <div
-            className="absolute z-10 overflow-hidden"
-            style={{
-              left: animWidth,
-              top: 70,
-              width: navWidth,
-              height: 1010,
-              pointerEvents: settingsOpen ? undefined : 'none',
-            }}
-          >
-            <Settings visible={settingsOpen} onClose={() => setSettingsOpen(false)} />
-          </div>
-
-          <div ref={dockMusicHost} className="dock-music-host" style={{ position: 'absolute', left: 580, top: 70, width: 1340, height: 1010, zIndex: 24, overflow: 'hidden', pointerEvents: musicOpen ? 'auto' : 'none' }} />
-
-          {/* A 区：顶部状态栏 */}
-          <div
-            className="absolute top-0 z-10"
-            style={{ left: VIZ_NORMAL }}
-          >
-            <StatusBar expanded={expanded} />
-          </div>
-
-          {/* 手柄 */}
-          <div
-            className="absolute z-20 flex items-center justify-center cursor-pointer group"
-            role="button"
-            tabIndex={0}
-            aria-label={expanded ? "Collapse vehicle view" : "Expand vehicle view"}
-            aria-expanded={expanded}
-            style={{
-              top: 0,
-              left: animWidth - 24,
-              width: 24,
-              height: 1080,
-            }}
-            onClick={toggle}
-            onKeyDown={event => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault()
-                toggle()
-              }
-            }}
-          >
+            {/* B 区：车辆可视化 */}
             <div
-              className="w-[8px] h-[120px] rounded-full transition-colors"
-              style={{ background: 'var(--color-handle-idle)' }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-handle-hover)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-handle-idle)')}
-            />
-          </div>
+              className="absolute top-0 left-0 overflow-hidden"
+              style={{ width: animWidth, height: 1080 }}
+            >
+              <Sidebar dockMusicHost={dockMusicHost} dockMusicOpen={musicOpen} onDockMusicClose={() => setMusicOpen(false)} vizWidth={animWidth} expanded={expanded} onNavigation={openNavigation} />
+            </div>
 
-          <ClimatePanel visible={climateOpen} driver={driverTemperature} passenger={passengerTemperature} level={fanLevel} powered={climatePowered}
-            onDriver={setDriverTemperature} onPassenger={setPassengerTemperature}
-            onLevel={value => { setFanLevel(value); setClimatePowered(true) }} onPower={() => setClimatePowered(value => !value)}
-            onClose={() => setClimateOpen(false)} />
-
-          <SeatPanel visible={seatOpen} selected={selectedSeat} onSelect={setSelectedSeat} onClose={closeSeat} />
-
-          {/* D 区：底部控制栏 */}
-          <div
-            className="absolute bottom-0 left-0"
-            style={{ width: 1920, height: 120, zIndex: 27, transform: 'translateZ(0)' }}
-          >
-            <ControlBar
-              driverTemperature={driverTemperature} passengerTemperature={passengerTemperature}
-              onDriverTemperatureChange={setDriverTemperature} onPassengerTemperatureChange={setPassengerTemperature}
-              fanLevel={climatePowered ? fanLevel : 0} fanMode={climatePowered ? 'MANUAL' : 'OFF'}
-              onFanClick={() => { setMusicOpen(false); setSeatOpen(false); setClimateOpen(value => !value); setAppToastOpen(false); setSettingsOpen(false) }}
-              onTemperatureClick={() => { setMusicOpen(false); setSeatOpen(false); setClimateOpen(true); setAppToastOpen(false); setSettingsOpen(false) }}
-              settingsOpen={settingsOpen} climateOpen={climateOpen} musicOpen={musicOpen}
-              driverSeatOpen={seatOpen && selectedSeat === 0} passengerSeatOpen={seatOpen && selectedSeat === 1}
-              onMusicClick={() => { setClimateOpen(false); setSeatOpen(false); setSettingsOpen(false); setAppToastOpen(false); setExpanded(false); setMusicOpen(value => !value) }}
-              appToastOpen={appToastOpen}
-              onAppClick={toggleAppToast}
-              onModel3Click={toggleSettings}
-              onDriverSeatClick={() => openSeat(0)} onPassengerSeatClick={() => openSeat(1)}
-            />
-          </div>
-
-          {/* AppToast 弹窗 */}
-          {appToastOpen && (
+            {/* C 区：导航地图 */}
             <div
-              className="absolute z-30"
-              style={{ inset: 0 }}
-              onClick={toggleAppToast}
-            />
-          )}
-          <div
-            className="absolute z-40"
-            style={{
-              bottom: 140,
-              left: (1920 - 1000) / 2,
-              pointerEvents: appToastOpen ? undefined : 'none',
-            }}
-          >
-            <AppToast visible={appToastOpen} />
+              className="absolute top-0 overflow-hidden"
+              style={{
+                left: animWidth,
+                width: navWidth,
+                height: 1080,
+              }}
+            >
+              <Navigate ref={navigationRef} vizWidth={animMapWidth} />
+            </div>
+
+            {/* Settings - 位于C区内 */}
+            <div
+              className="absolute z-10 overflow-hidden"
+              style={{
+                left: animWidth,
+                top: 70,
+                width: navWidth,
+                height: 1010,
+                pointerEvents: settingsOpen ? undefined : 'none',
+              }}
+            >
+              <Settings visible={settingsOpen} onClose={() => setSettingsOpen(false)} />
+            </div>
+
+            <div ref={dockMusicHost} className="dock-music-host" style={{ position: 'absolute', left: 580, top: 70, width: 1340, height: 1010, zIndex: 24, overflow: 'hidden', pointerEvents: musicOpen ? 'auto' : 'none' }} />
+
+            {/* A 区：顶部状态栏 */}
+            <div
+              className="absolute top-0 z-10"
+              style={{ left: VIZ_NORMAL }}
+            >
+              <StatusBar expanded={expanded} />
+            </div>
+
+            {/* 手柄 */}
+            <div
+              className="absolute z-20 flex items-center justify-center cursor-pointer group"
+              role="button"
+              tabIndex={0}
+              aria-label={expanded ? "Collapse vehicle view" : "Expand vehicle view"}
+              aria-expanded={expanded}
+              style={{
+                top: 0,
+                left: animWidth - 24,
+                width: 24,
+                height: 1080,
+              }}
+              onClick={toggle}
+              onKeyDown={event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  toggle()
+                }
+              }}
+            >
+              <div
+                className="w-[8px] h-[120px] rounded-full transition-colors"
+                style={{ background: 'var(--color-handle-idle)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-handle-hover)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-handle-idle)')}
+              />
+            </div>
+
+            <ClimatePanel visible={climateOpen} driver={driverTemperature} passenger={passengerTemperature} level={fanLevel} powered={climatePowered}
+              onDriver={setDriverTemperature} onPassenger={setPassengerTemperature}
+              onLevel={value => { setFanLevel(value); setClimatePowered(true) }} onPower={() => setClimatePowered(value => !value)}
+              onClose={() => setClimateOpen(false)} />
+
+            <SeatPanel visible={seatOpen} selected={selectedSeat} onSelect={setSelectedSeat} onClose={closeSeat} />
+
+            {/* D 区：底部控制栏 */}
+            <div
+              className="absolute bottom-0 left-0"
+              style={{ width: 1920, height: 120, zIndex: 27, transform: 'translateZ(0)' }}
+            >
+              <ControlBar
+                driverTemperature={driverTemperature} passengerTemperature={passengerTemperature}
+                onDriverTemperatureChange={setDriverTemperature} onPassengerTemperatureChange={setPassengerTemperature}
+                fanLevel={climatePowered ? fanLevel : 0} fanMode={climatePowered ? 'MANUAL' : 'OFF'}
+                onFanClick={() => { setMusicOpen(false); setSeatOpen(false); setClimateOpen(value => !value); setAppToastOpen(false); setSettingsOpen(false) }}
+                onTemperatureClick={() => { setMusicOpen(false); setSeatOpen(false); setClimateOpen(true); setAppToastOpen(false); setSettingsOpen(false) }}
+                settingsOpen={settingsOpen} climateOpen={climateOpen} musicOpen={musicOpen}
+                driverSeatOpen={seatOpen && selectedSeat === 0} passengerSeatOpen={seatOpen && selectedSeat === 1}
+                onMusicClick={() => { setClimateOpen(false); setSeatOpen(false); setSettingsOpen(false); setAppToastOpen(false); setExpanded(false); setMusicOpen(value => !value) }}
+                appToastOpen={appToastOpen}
+                onAppClick={toggleAppToast}
+                onModel3Click={toggleSettings}
+                onDriverSeatClick={() => openSeat(0)} onPassengerSeatClick={() => openSeat(1)}
+              />
+            </div>
+
+            {/* AppToast 弹窗 */}
+            {appToastOpen && (
+              <div
+                className="absolute z-30"
+                style={{ inset: 0 }}
+                onClick={toggleAppToast}
+              />
+            )}
+            <div
+              className="absolute z-40"
+              style={{
+                bottom: 140,
+                left: (1920 - 1000) / 2,
+                pointerEvents: appToastOpen ? undefined : 'none',
+              }}
+            >
+              <AppToast visible={appToastOpen} />
+            </div>
           </div>
         </div>
       </div>

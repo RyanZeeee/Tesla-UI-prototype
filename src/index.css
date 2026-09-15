@@ -40,3 +40,37 @@ body {
   -webkit-user-select: text;
   user-select: text;
 }
+
+/* ===== 原型外框外侧上方的 GitHub 入口 ===== */
+/* 位于缩放容器顶部留白（FRAME_HEADER_H）内，随 1920 × 1200 画布一起缩放与移动 */
+.github-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition:
+    background var(--duration-normal) var(--easing-default),
+    border-color var(--duration-normal) var(--easing-default),
+    transform var(--duration-fast) var(--easing-default);
+}
+.github-link:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.github-link:active { transform: scale(0.94); }
+.github-link:focus-visible {
+  outline: 2px solid var(--color-switch-on);
+  outline-offset: 3px;
+}
+.github-link > img {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
