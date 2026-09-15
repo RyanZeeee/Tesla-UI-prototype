@@ -33,7 +33,7 @@ The downloaded vehicle GLB remains the source asset. The prototype changes displ
 
 Music covers in `src/assets/artwork/`, the source map image, and reference/interface artwork are prototype resources. Separate redistribution licenses for those assets are not recorded in this project; the vehicle model's CC BY 4.0 license does not cover them. Tesla names and branding remain associated with their respective owners.
 
-`src/assets/icons/chijiao.jpeg` is the author-supplied profile image. The project author is **赤角大王 / RyanZeeee**; model authorship is credited separately above.
+`src/assets/icons/chijiao.jpeg` is the author-supplied profile image. The project author is **Chi Jiao / RyanZeeee**; model authorship is credited separately above.
 
 ## Project license status
 

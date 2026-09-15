@@ -38,16 +38,16 @@ export function AppToast({ visible }: AppToastProps) {
       >
         <img
           src={chijiaoIcon}
-          alt="赤角大王"
+          alt="Chi Jiao"
           draggable={false}
           style={{ objectFit: 'cover', borderRadius: 16 }}
           width={80}
           height={80}
         />
       </button>
-      <div style={{ position: 'absolute', top: 130, left: 30, color: '#fff', fontFamily: 'var(--font-family-base)', lineHeight: 1.5 }}>
-        <div style={{ fontSize: 24, fontWeight: 500 }}>赤角大王</div>
-        <div style={{ fontSize: 20, marginTop: 6 }}>yanrunze0209@qq.com</div>
+      <div style={{ position: 'absolute', top: 130, left: 30, fontFamily: 'var(--font-family-base)', lineHeight: 1.5 }}>
+        <div style={{ fontSize: 24, fontWeight: 500, color: 'rgba(255, 255, 255, 0.72)' }}>Chi Jiao</div>
+        <div style={{ fontSize: 20, marginTop: 6, color: 'rgba(255, 255, 255, 0.45)' }}>yanrunze0209@qq.com</div>
       </div>
     </div>
   )
