@@ -2,6 +2,8 @@
 
 [English](README.md) · **简体中文**
 
+**[在线预览：https://ryanzeeee.github.io/Tesla-UI-prototype/](https://ryanzeeee.github.io/Tesla-UI-prototype/)**
+
 特斯拉风格车机交互原型，用于探索浏览器中的车辆界面、交互动效和 3D 展示。
 
 项目包含实时 Model 3 车模、3D 空调界面、前排座椅调节、模拟地图导航、车控设置和音乐播放器。界面以 **1920 × 1200** 为设计画布，随浏览器窗口等比例缩放。

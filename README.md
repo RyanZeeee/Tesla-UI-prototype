@@ -2,6 +2,8 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
+**[Live demo: https://ryanzeeee.github.io/Tesla-UI-prototype/](https://ryanzeeee.github.io/Tesla-UI-prototype/)**
+
 A Tesla-inspired in-car touchscreen prototype for exploring vehicle interfaces, interaction motion, and 3D presentation in the browser.
 
 The project includes a real-time Model 3 viewer, a 3D climate interface, front-seat adjustment, a simulated navigation map, vehicle settings, and a music player. The interface uses a **1920 × 1200** design canvas that scales proportionally with the browser window.
